@@ -13,8 +13,21 @@ var size = 25;
 
 // X and Y
 var startHeight = 425;
-var column = 50;
-var prevColumn;
+var column = 250;
+var lastKeyRight = true;
+var centerOfMario;
+
+// Audio
+var audio = new Audio("./theme.mp3");
+audio.addEventListener(
+  "ended",
+  function() {
+    this.currentTime = 0;
+    this.play();
+  },
+  false
+);
+audio.play();
 
 document.onkeydown = function(e) {
   switch (e.keyCode) {
@@ -33,23 +46,26 @@ document.onkeydown = function(e) {
   }
 };
 function moveRight() {
-  if (column + 11 * size < innerWidth) {
+  lastKeyRight = true;
+  if (centerOfMario + 8 * size < innerWidth) {
     column += size;
   }
 }
 function moveLeft() {
-  if (column - 2 * size > 0) {
+  lastKeyRight = false;
+  if (centerOfMario - 6 * size > 0) {
     column -= size;
   }
 }
 // Animate
 function animate() {
   requestAnimationFrame(animate);
+  centerOfMario = column + 88;
   c.clearRect(0, 0, innerWidth, innerHeight);
-  // if (!prevColumn || prevColumn === column) {
-  marioStillRight();
-  // marioStillLeft();
-  // }
-  // prevColumn = column;
+  if (lastKeyRight) {
+    marioStillRight();
+  } else {
+    marioStillLeft();
+  }
 }
 animate();
