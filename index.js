@@ -1,71 +1,36 @@
+// ==================== Canvas
 var canvas = document.querySelector("canvas");
+var c = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+canvas.style.backgroundColor = sky;
 
-var c = canvas.getContext("2d");
-
-var red = "#f63911";
-var brown = "#877000";
-var tan = "#fc9838";
-
-var size = 25;
-
-// X and Y
-var startHeight = 425;
-var column = 250;
-var lastKeyRight = true;
-var centerOfMario;
-
-// Audio
-var audio = new Audio("./theme.mp3");
-audio.addEventListener(
-  "ended",
-  function() {
-    this.currentTime = 0;
-    this.play();
-  },
-  false
-);
-audio.play();
-
-document.onkeydown = function(e) {
-  switch (e.keyCode) {
-    case 37:
-      moveLeft();
-      break;
-    case 38:
-      // moveUp();
-      break;
-    case 39:
-      moveRight();
-      break;
-    case 40:
-      // DOWN
-      break;
-  }
-};
-function moveRight() {
-  lastKeyRight = true;
-  if (centerOfMario + 8 * size < innerWidth) {
-    column += size;
-  }
-}
-function moveLeft() {
-  lastKeyRight = false;
-  if (centerOfMario - 6 * size > 0) {
-    column -= size;
-  }
-}
-// Animate
+// ==================== Animate
 function animate() {
+  // Rerender Logic
   requestAnimationFrame(animate);
-  centerOfMario = column + 88;
   c.clearRect(0, 0, innerWidth, innerHeight);
+  centerOfMario = column + 88;
+
+  // Mario Facing Logic
   if (lastKeyRight) {
     marioStillRight();
   } else {
     marioStillLeft();
   }
+
+  // Jump Logic
+  if (isJumping && startHeight > 50) {
+    startHeight -= size;
+  }
+  if (isJumping && startHeight <= 50) {
+    isJumping = false;
+  }
+  if (!isJumping && startHeight < 326) {
+    startHeight += size;
+  }
+  // Create Ground
+  blockIter();
 }
 animate();
