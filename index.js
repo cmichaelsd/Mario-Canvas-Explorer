@@ -15,9 +15,11 @@ function animate() {
 
   // Mario Facing Logic
   if (lastKeyRight) {
-    marioStillRight();
+    // marioStillRight();
+    marioRunningOneRight();
   } else {
-    marioStillLeft();
+    // marioStillLeft();
+    marioRunningOneLeft();
   }
 
   // Jump Logic
