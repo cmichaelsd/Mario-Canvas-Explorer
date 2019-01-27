@@ -10,8 +10,8 @@ var sky = "#5d94fb";
 // ==================== Mario Position
 var startHeight = 326;
 var column = 250;
-var prevColumn;
 var lastKeyRight = true;
+var keyPressed = false;
 var centerOfMario;
 
 // ==================== Mario Jump

@@ -13,25 +13,35 @@ function animate() {
   c.clearRect(0, 0, innerWidth, innerHeight);
   centerOfMario = column + 88;
 
-  console.log(prevColumn, column);
   // Mario Facing Logic
   if (lastKeyRight) {
     if (startHeight < 326) {
       marioJumpingRight();
-    } else if (prevColumn === column) {
+    } else if (!keyPressed) {
       marioStillRight();
     } else {
-      marioRunningOneRight();
+      var frame = Math.trunc(Math.abs(column) / 100);
+      if (frame % 2 === 0) {
+        marioRunningOneRight();
+      } else {
+        marioRunningTwoRight();
+      }
     }
   } else {
     if (startHeight < 326) {
       marioJumpingLeft();
-    } else if (prevColumn === column) {
+    } else if (!keyPressed) {
       marioStillLeft();
     } else {
-      marioRunningOneLeft();
+      var frame = Math.trunc(Math.abs(column) / 100);
+      if (frame % 2 === 0) {
+        marioRunningOneLeft();
+      } else {
+        marioRunningTwoLeft();
+      }
     }
   }
+  // marioRunningTwoLeft();
 
   // Jump Logic
   if (isJumping && startHeight > 50) {
@@ -43,6 +53,7 @@ function animate() {
   if (!isJumping && startHeight < 326) {
     startHeight += size;
   }
+
   // Create Ground
   blockIter();
   prevColumn = column;

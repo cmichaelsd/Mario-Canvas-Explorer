@@ -1,6 +1,7 @@
 function marioJumpingLeft() {
-  centerOfMario += 25;
+  centerOfMario -= 25;
   var copyStart = column;
+  column -= 100;
   // Rectangles
   // 1
   for (var i = 0; i <= 10; i++) {
