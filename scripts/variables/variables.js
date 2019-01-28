@@ -14,6 +14,9 @@ var lastKeyRight = true;
 var keyPressed = false;
 var centerOfMario;
 
+// ==================== Frame
+var prevEven = null;
+
 // ==================== Mario Jump
 var isJumping = false;
 

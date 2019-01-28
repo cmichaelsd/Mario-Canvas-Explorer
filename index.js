@@ -21,10 +21,13 @@ function animate() {
       marioStillRight();
     } else {
       var frame = Math.trunc(Math.abs(column) / 100);
-      if (frame % 2 === 0) {
+      if (prevEven !== frame && frame % 2 === 0) {
+        prevEven = frame;
         marioRunningOneRight();
-      } else {
+      } else if (frame % 2 !== 0) {
         marioRunningTwoRight();
+      } else if (prevEven === frame && frame % 2 === 0) {
+        marioRunningThreeRight();
       }
     }
   } else {
@@ -34,14 +37,16 @@ function animate() {
       marioStillLeft();
     } else {
       var frame = Math.trunc(Math.abs(column) / 100);
-      if (frame % 2 === 0) {
+      if (prevEven !== frame && frame % 2 === 0) {
+        prevEven = frame;
         marioRunningOneLeft();
-      } else {
+      } else if (frame % 2 !== 0) {
         marioRunningTwoLeft();
+      } else if (prevEven === frame && frame % 2 === 0) {
+        marioRunningThreeLeft();
       }
     }
   }
-  // marioRunningTwoLeft();
 
   // Jump Logic
   if (isJumping && startHeight > 50) {

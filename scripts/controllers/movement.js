@@ -19,6 +19,7 @@ document.onkeyup = function(e) {
     case 37:
     case 39:
       keyPressed = false;
+      prevEven = null;
   }
 };
 

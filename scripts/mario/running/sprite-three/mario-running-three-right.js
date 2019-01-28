@@ -1,4 +1,4 @@
-function marioRunningTwoRight() {
+function marioRunningThreeRight() {
   var copyStart = column;
   // Rectangles
   // 1
