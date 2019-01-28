@@ -13,6 +13,9 @@ function animate() {
   c.clearRect(0, 0, innerWidth, innerHeight);
   centerOfMario = column + 88;
 
+  // Create Bush
+  bush();
+
   // Mario Facing Logic
   if (lastKeyRight) {
     if (startHeight < 326) {
