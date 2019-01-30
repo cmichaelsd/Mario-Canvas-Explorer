@@ -40,7 +40,7 @@ function moveLeft() {
 function moveUp() {
   if (startHeight === 326) {
     if (!isJumping) {
-      // jump.play();
+      jump.play();
     }
     isJumping = true;
   }
